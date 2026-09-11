@@ -3,140 +3,216 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LocaQR - 3D Location QR Generator</title>
 
-<title>LocaQR - Location QR Generator</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #eef2ff, #f8f9ff);
     min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at top, #263cff, #080b20 55%, #02030a);
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    overflow-x: hidden;
 }
 
+/* 3D floating background */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    filter: blur(5px);
+    opacity: 0.35;
+    animation: float 6s infinite ease-in-out;
+}
+
+body::before {
+    background: #00eaff;
+    top: 5%;
+    left: 5%;
+}
+
+body::after {
+    background: #8b00ff;
+    bottom: 5%;
+    right: 5%;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-35px) rotate(20deg); }
+}
+
+/* Main 3D card */
 .container {
-    width: 100%;
+    width: 92%;
     max-width: 650px;
+    padding: 40px 30px;
     text-align: center;
+
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 30px;
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,0.55),
+        inset 0 1px 1px rgba(255,255,255,0.3);
+
+    transform: perspective(1000px) rotateX(2deg);
 }
 
+/* Logo */
 .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #4f46e5;
-    margin-bottom: 35px;
+    font-size: 60px;
+    margin-bottom: 5px;
+    animation: bounce 3s infinite ease-in-out;
 }
 
-.card {
-    background: white;
-    padding: 45px 30px;
-    border-radius: 25px;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.10);
-}
-
-.pin {
-    font-size: 55px;
+@keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 h1 {
-    margin: 15px 0 10px;
     font-size: 38px;
-    color: #171717;
+    margin-bottom: 10px;
+    text-shadow: 0 5px 20px rgba(0,0,0,0.5);
 }
 
 .subtitle {
-    color: #666;
+    color: #cfd5ff;
     margin-bottom: 30px;
 }
 
-.input-box {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
+/* Input */
 input {
-    flex: 1;
-    padding: 16px;
-    border: 2px solid #e5e7eb;
-    border-radius: 12px;
-    font-size: 16px;
-    outline: none;
-}
-
-input:focus {
-    border-color: #6366f1;
-}
-
-button {
-    border: none;
-    cursor: pointer;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.generate {
     width: 100%;
-    padding: 16px;
-    background: #4f46e5;
-    color: white;
+    padding: 18px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    background: rgba(255,255,255,0.95);
+    color: #111;
+
+    box-shadow:
+        0 8px 0 rgba(0,0,0,0.2),
+        0 15px 30px rgba(0,0,0,0.25);
 }
 
-.generate:hover {
-    background: #4338ca;
+/* 3D button */
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 17px;
+    border: none;
+    border-radius: 15px;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(145deg, #2878ff, #1744c5);
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 0 #102b7d,
+        0 15px 25px rgba(0,0,0,0.35);
+
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 11px 0 #102b7d,
+        0 20px 30px rgba(0,0,0,0.4);
+}
+
+button:active {
+    transform: translateY(5px);
+    box-shadow:
+        0 3px 0 #102b7d,
+        0 8px 15px rgba(0,0,0,0.3);
+}
+
+/* QR section */
+#result {
+    margin-top: 30px;
+}
+
+.qr-card {
+    padding: 25px;
+    background: white;
+    border-radius: 25px;
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.5),
+        0 0 30px rgba(0,220,255,0.25);
+
+    transform: perspective(800px) rotateY(-3deg);
 }
 
 #qrcode {
-    margin: 30px auto 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#qrcode img {
+    width: 230px;
+    height: 230px;
 }
 
 .actions {
-    display: none;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 15px;
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
 }
 
 .actions button {
-    padding: 12px 20px;
-    background: #111827;
-    color: white;
+    margin-top: 0;
 }
 
-.features {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 30px;
-    color: #555;
-    font-size: 14px;
+.maps {
+    background: linear-gradient(145deg,#20b878,#087a4d);
+    box-shadow: 0 7px 0 #055936;
+}
+
+.clear {
+    background: linear-gradient(145deg,#ff4b5c,#b91d31);
+    box-shadow: 0 7px 0 #741522;
 }
 
 .footer {
-    margin-top: 25px;
-    color: #888;
-    font-size: 13px;
+    margin-top: 30px;
+    color: #aeb6df;
+    font-size: 14px;
 }
 
-@media (max-width: 500px) {
+@media(max-width:600px) {
+    .container {
+        padding: 30px 20px;
+    }
+
     h1 {
         font-size: 30px;
     }
 
-    .input-box {
+    .actions {
         flex-direction: column;
-    }
-
-    .card {
-        padding: 35px 20px;
     }
 }
 </style>
@@ -146,56 +222,33 @@ button {
 
 <div class="container">
 
-    <div class="logo">📍 LocaQR</div>
+    <div class="logo">📍</div>
 
-    <div class="card">
+    <h1>LocaQR</h1>
 
-        <div class="pin">📍</div>
+    <p class="subtitle">
+        Turn any location into a beautiful QR code
+    </p>
 
-        <h1>Location QR Generator</h1>
+    <input
+        id="location"
+        type="text"
+        placeholder="Enter a location..."
+    >
 
-        <p class="subtitle">
-            Turn any location into a QR code in seconds.
-        </p>
+    <button onclick="generateQR()">
+        🚀 Generate 3D QR Code
+    </button>
 
-        <div class="input-box">
-            <input
-                type="text"
-                id="location"
-                placeholder="Enter a location..."
-            >
-        </div>
-
-        <button class="generate" onclick="generateQR()">
-            🚀 Generate QR Code
-        </button>
-
-        <div id="qrcode"></div>
-
-        <div class="actions" id="actions">
-            <button onclick="downloadQR()">⬇️ Download</button>
-            <button onclick="openMaps()">🗺️ Maps</button>
-        </div>
-
-    </div>
-
-    <div class="features">
-        <span>✓ Free</span>
-        <span>✓ Fast</span>
-        <span>✓ No Sign-up</span>
-    </div>
+    <div id="result"></div>
 
     <div class="footer">
-        © 2026 LocaQR
+        ✨ Fast • Simple • Free
     </div>
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
 <script>
-
-let mapURL = "";
 
 function generateQR() {
 
@@ -203,45 +256,65 @@ function generateQR() {
         document.getElementById("location").value.trim();
 
     if (!location) {
-        alert("Please enter a location.");
+        alert("Please enter a location!");
         return;
     }
 
-    mapURL =
+    const mapURL =
         "https://www.google.com/maps/search/?api=1&query="
         + encodeURIComponent(location);
 
-    document.getElementById("qrcode").innerHTML = "";
+    document.getElementById("result").innerHTML = `
+        <div class="qr-card">
+
+            <div id="qrcode"></div>
+
+            <div class="actions">
+
+                <button onclick="downloadQR()">
+                    📥 Download
+                </button>
+
+                <button class="maps"
+                    onclick="window.open('${mapURL}', '_blank')">
+                    🗺️ Maps
+                </button>
+
+            </div>
+
+            <button class="clear"
+                onclick="clearQR()">
+                🗑️ Clear
+            </button>
+
+        </div>
+    `;
 
     new QRCode(document.getElementById("qrcode"), {
         text: mapURL,
-        width: 250,
-        height: 250
+        width: 230,
+        height: 230
     });
-
-    document.getElementById("actions").style.display = "flex";
 }
 
 function downloadQR() {
 
-    const qr =
+    const qrImage =
         document.querySelector("#qrcode img");
 
-    if (!qr) return;
+    if (!qrImage) return;
 
     const link = document.createElement("a");
 
-    link.href = qr.src;
-    link.download = "location-qr.png";
+    link.href = qrImage.src;
+    link.download = "LocaQR.png";
 
     link.click();
 }
 
-function openMaps() {
-
-    if (mapURL) {
-        window.open(mapURL, "_blank");
-    }
+function clearQR() {
+    document.getElementById("result").innerHTML = "";
+    document.getElementById("location").value = "";
 }
 
 </script>
