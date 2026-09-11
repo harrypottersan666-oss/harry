@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Location QR Generator</title>
+</head>
+<body>
+
+<h1>📍 Location QR Generator</h1>
+
+<input id="location" placeholder="Enter location">
+
+<button onclick="generateQR()">Generate QR</button>
+
+<div id="qrcode"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+function generateQR() {
+
+    const location = document.getElementById("location").value;
+
+    if (!location) {
+        alert("Enter a location");
+        return;
+    }
+
+    const mapURL =
+        "https://www.google.com/maps/search/?api=1&query="
+        + encodeURIComponent(location);
+
+    document.getElementById("qrcode").innerHTML = "";
+
+    new QRCode(document.getElementById("qrcode"), {
+        text: mapURL,
+        width: 250,
+        height: 250
+    });
+}
+</script>
+
+</body>
+</html>
