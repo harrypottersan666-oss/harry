@@ -9,361 +9,295 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
     font-family:Arial,Helvetica,sans-serif;
     background:#f5f5f5;
     color:#111;
 }
-
 nav{
-    height:75px;
+    height:76px;
+    padding:0 6%;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 6%;
     background:#fff;
     position:sticky;
     top:0;
     z-index:100;
     border-bottom:1px solid #eee;
 }
-
 .logo{
     font-size:25px;
     font-weight:900;
     letter-spacing:-1px;
 }
-
 .nav-links{
     display:flex;
-    gap:30px;
+    gap:28px;
 }
-
 .nav-links a{
-    text-decoration:none;
     color:#111;
-    font-size:14px;
-    font-weight:bold;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:800;
 }
-
 .hero{
     min-height:80vh;
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:70px 20px;
+    padding:80px 20px;
     background:#fff;
 }
-
-.hero-content{
-    max-width:1100px;
-}
-
-.small-title{
-    font-size:14px;
+.small{
+    font-size:13px;
     font-weight:bold;
-    letter-spacing:3px;
-    margin-bottom:25px;
+    letter-spacing:4px;
+    margin-bottom:28px;
 }
-
 .hero h1{
     font-size:clamp(55px,11vw,150px);
     line-height:.82;
+    letter-spacing:-8px;
     font-weight:900;
-    letter-spacing:-7px;
-    text-transform:uppercase;
 }
-
-.hero h1 span{
-    display:block;
-}
-
-.hero-text{
-    max-width:600px;
+.hero h1 span{display:block}
+.hero p{
+    max-width:620px;
     margin:35px auto;
     color:#666;
     font-size:18px;
     line-height:1.6;
 }
-
-.primary-btn{
+.btn{
     display:inline-block;
-    padding:17px 32px;
+    padding:17px 30px;
+    border:0;
+    border-radius:50px;
     background:#111;
     color:#fff;
-    border-radius:50px;
-    border:none;
-    font-size:15px;
+    text-decoration:none;
     font-weight:bold;
     cursor:pointer;
-    text-decoration:none;
     transition:.25s;
 }
-
-.primary-btn:hover{
+.btn:hover{
     transform:translateY(-4px);
     background:#333;
 }
-
-.generator-section{
+.creator-section{
     padding:100px 6%;
     background:#f1f1f1;
 }
-
-.generator{
-    max-width:1000px;
+.creator{
+    max-width:1050px;
     margin:auto;
     background:#fff;
+    border-radius:28px;
     padding:55px;
-    border-radius:25px;
-    box-shadow:0 20px 60px rgba(0,0,0,.08);
+    box-shadow:0 25px 70px rgba(0,0,0,.08);
 }
-
-.generator h2{
+.creator h2{
     text-align:center;
-    font-size:45px;
+    font-size:48px;
+    letter-spacing:-3px;
     font-weight:900;
-    letter-spacing:-2px;
-    margin-bottom:12px;
 }
-
-.generator-description{
+.subtitle{
     text-align:center;
     color:#777;
-    margin-bottom:35px;
+    margin:12px 0 35px;
 }
-
-.type-grid{
+.types{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:10px;
     margin-bottom:30px;
 }
-
-.type-btn{
-    padding:15px 8px;
+.type{
     border:1px solid #ddd;
     background:#fff;
     border-radius:12px;
+    padding:15px 8px;
     cursor:pointer;
     font-weight:bold;
-    font-size:13px;
+    font-size:12px;
     transition:.2s;
 }
-
-.type-btn:hover,
-.type-btn.active{
+.type:hover,.type.active{
     background:#111;
     color:#fff;
     border-color:#111;
     transform:translateY(-2px);
 }
-
-.form-area{
-    margin-top:20px;
-}
-
 .field{
     width:100%;
     padding:17px;
     border:2px solid #ddd;
     border-radius:12px;
     font-size:16px;
-    outline:none;
     margin-bottom:12px;
+    outline:none;
 }
-
-.field:focus{
-    border-color:#111;
-}
-
+.field:focus{border-color:#111}
 textarea.field{
     min-height:120px;
     resize:vertical;
 }
-
 .generate{
     width:100%;
     padding:18px;
-    background:#111;
-    color:white;
-    border:none;
+    border:0;
     border-radius:12px;
-    font-size:16px;
+    background:#111;
+    color:#fff;
     font-weight:bold;
     cursor:pointer;
-    margin-top:5px;
 }
-
-.generate:hover{
-    background:#333;
+.brand-options{
+    background:#f7f7f7;
+    border-radius:18px;
+    padding:20px;
+    margin:10px 0 15px;
 }
-
-#result{
-    margin-top:30px;
+.brand-options h3{
+    margin-bottom:15px;
+    font-size:18px;
 }
-
+.option-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+.option{
+    padding:11px 15px;
+    border:1px solid #ddd;
+    background:#fff;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+.option.active{
+    background:#111;
+    color:#fff;
+}
+.color-row{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    margin-top:15px;
+}
+.color-row input{
+    width:55px;
+    height:40px;
+    border:0;
+}
+#result{margin-top:30px}
 .qr-box{
     padding:30px;
     border:1px solid #eee;
     border-radius:20px;
     text-align:center;
 }
-
 #qrcode{
     display:flex;
     justify-content:center;
     margin-bottom:25px;
 }
-
-#qrcode img{
-    max-width:100%;
-}
-
+#qrcode img{max-width:100%}
 .actions{
     display:flex;
     justify-content:center;
     flex-wrap:wrap;
     gap:10px;
 }
-
 .actions button{
     padding:13px 20px;
+    border:0;
     border-radius:50px;
-    border:none;
-    cursor:pointer;
-    font-weight:bold;
     background:#111;
     color:#fff;
+    font-weight:bold;
+    cursor:pointer;
 }
-
 .info{
-    background:#f7f7f7;
     padding:15px;
+    margin-bottom:12px;
     border-radius:12px;
-    margin-bottom:15px;
+    background:#f5f5f5;
     color:#666;
     font-size:13px;
 }
-
 .steps{
     padding:110px 6%;
     background:#111;
     color:#fff;
 }
-
 .steps-title{
     font-size:clamp(50px,8vw,100px);
-    font-weight:900;
     line-height:.9;
     letter-spacing:-5px;
+    font-weight:900;
     margin-bottom:70px;
 }
-
 .step-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:25px;
 }
-
 .step{
+    min-height:240px;
     padding:35px;
-    min-height:250px;
     border-top:2px solid #fff;
 }
-
 .number{
-    font-size:15px;
-    margin-bottom:60px;
     color:#aaa;
+    margin-bottom:55px;
 }
-
 .step h3{
     font-size:30px;
     margin-bottom:15px;
 }
-
 .step p{
     color:#aaa;
     line-height:1.6;
 }
-
 .final{
-    min-height:60vh;
-    background:#fff;
+    min-height:55vh;
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:70px 20px;
+    background:#fff;
 }
-
 .final h2{
-    font-size:clamp(50px,9vw,110px);
-    line-height:.9;
+    font-size:clamp(55px,9vw,110px);
+    line-height:.85;
+    letter-spacing:-6px;
     font-weight:900;
-    letter-spacing:-5px;
 }
-
 .final p{
-    color:#666;
     margin:25px 0;
+    color:#666;
 }
-
 footer{
-    padding:35px 6%;
     background:#111;
     color:#aaa;
+    padding:35px 6%;
     display:flex;
     justify-content:space-between;
     font-size:13px;
 }
-
 @media(max-width:700px){
-
-    .nav-links{
-        display:none;
-    }
-
-    .hero h1{
-        letter-spacing:-4px;
-    }
-
-    .generator{
-        padding:35px 20px;
-    }
-
-    .generator h2{
-        font-size:35px;
-    }
-
-    .type-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .step-grid{
-        grid-template-columns:1fr;
-    }
-
-    .steps-title{
-        letter-spacing:-3px;
-    }
-
-    footer{
-        flex-direction:column;
-        gap:10px;
-    }
+    .nav-links{display:none}
+    .creator{padding:30px 20px}
+    .types{grid-template-columns:repeat(2,1fr)}
+    .step-grid{grid-template-columns:1fr}
+    .hero h1{letter-spacing:-4px}
+    footer{flex-direction:column;gap:10px}
 }
 </style>
 </head>
@@ -371,97 +305,72 @@ footer{
 <body>
 
 <nav>
-
     <div class="logo">LocaQR.</div>
-
     <div class="nav-links">
-        <a href="#generator">CREATE</a>
-        <a href="#how">HOW IT WORKS</a>
+        <a href="#creator">CREATE</a>
+        <a href="about.html">ABOUT</a>
     </div>
-
 </nav>
 
-
 <section class="hero">
+<div>
+    <div class="small">QR • SIMPLE • SMART</div>
 
-    <div class="hero-content">
+    <h1>
+        CREATE
+        <span>ANYTHING.</span>
+        <span>ONE SCAN.</span>
+    </h1>
 
-        <div class="small-title">
-            QR • SIMPLE • FAST
-        </div>
+    <p>
+        Turn locations, links, contacts, Wi-Fi, messages,
+        files and more into simple, shareable QR codes.
+    </p>
 
-        <h1>
-            CREATE
-            <span>ANYTHING.</span>
-            <span>ONE SCAN.</span>
-        </h1>
-
-        <p class="hero-text">
-            Create QR codes for locations, websites, contacts,
-            Wi-Fi, messages, events and more.
-        </p>
-
-        <a href="#generator" class="primary-btn">
-            CREATE YOUR QR →
-        </a>
-
-    </div>
-
+    <a href="#creator" class="btn">CREATE YOUR QR →</a>
+</div>
 </section>
 
 
-<section class="generator-section" id="generator">
+<section class="creator-section" id="creator">
 
-<div class="generator">
+<div class="creator">
 
 <h2>CREATE IT.</h2>
 
-<p class="generator-description">
-Choose what you want your QR code to contain.
+<p class="subtitle">
+Choose a QR type and make it yours.
 </p>
 
+<div class="types">
 
-<div class="type-grid">
-
-<button class="type-btn active" onclick="selectType('location',this)">📍 LOCATION</button>
-
-<button class="type-btn" onclick="selectType('link',this)">🔗 LINK</button>
-
-<button class="type-btn" onclick="selectType('text',this)">📝 TEXT</button>
-
-<button class="type-btn" onclick="selectType('phone',this)">📞 PHONE</button>
-
-<button class="type-btn" onclick="selectType('email',this)">✉️ EMAIL</button>
-
-<button class="type-btn" onclick="selectType('contact',this)">👤 CONTACT</button>
-
-<button class="type-btn" onclick="selectType('wifi',this)">📶 WI-FI</button>
-
-<button class="type-btn" onclick="selectType('sms',this)">💬 SMS</button>
-
-<button class="type-btn" onclick="selectType('whatsapp',this)">🟢 WHATSAPP</button>
-
-<button class="type-btn" onclick="selectType('event',this)">📅 EVENT</button>
-
-<button class="type-btn" onclick="selectType('file',this)">📄 FILE LINK</button>
+<button class="type active" onclick="selectType('location',this)">📍 LOCATION</button>
+<button class="type" onclick="selectType('link',this)">🔗 LINK</button>
+<button class="type" onclick="selectType('text',this)">📝 TEXT</button>
+<button class="type" onclick="selectType('phone',this)">📞 PHONE</button>
+<button class="type" onclick="selectType('email',this)">✉️ EMAIL</button>
+<button class="type" onclick="selectType('contact',this)">👤 CONTACT</button>
+<button class="type" onclick="selectType('wifi',this)">📶 WI-FI</button>
+<button class="type" onclick="selectType('sms',this)">💬 SMS</button>
+<button class="type" onclick="selectType('whatsapp',this)">🟢 WHATSAPP</button>
+<button class="type" onclick="selectType('event',this)">📅 EVENT</button>
+<button class="type" onclick="selectType('file',this)">📄 FILE</button>
+<button class="type" onclick="selectType('brand',this)">✨ BRANDED QR</button>
 
 </div>
 
-
-<div id="formArea" class="form-area"></div>
-
+<div id="formArea"></div>
 <div id="result"></div>
 
 </div>
-
 </section>
 
 
-<section class="steps" id="how">
+<section class="steps">
 
 <h2 class="steps-title">
-THREE STEPS.<br>
-THAT'S IT.
+ONE CODE.<br>
+MANY POSSIBILITIES.
 </h2>
 
 <div class="step-grid">
@@ -469,72 +378,64 @@ THAT'S IT.
 <div class="step">
 <div class="number">01</div>
 <h3>CHOOSE.</h3>
-<p>Select the type of QR code you want to create.</p>
+<p>Pick exactly what you want your QR code to share.</p>
 </div>
 
 <div class="step">
 <div class="number">02</div>
 <h3>CREATE.</h3>
-<p>Enter your information and generate your QR code.</p>
+<p>Add your information and generate your QR instantly.</p>
 </div>
 
 <div class="step">
 <div class="number">03</div>
-<h3>SHARE.</h3>
-<p>Download your QR code and share it anywhere.</p>
+<h3>CONNECT.</h3>
+<p>Download it, share it and let one scan do the rest.</p>
 </div>
 
 </div>
-
 </section>
 
 
 <section class="final">
 
 <div>
-
 <h2>
 READY<br>
 TO SCAN?
 </h2>
 
-<p>
-Create your QR code in seconds.
-</p>
+<p>Your next connection is only one scan away.</p>
 
-<a href="#generator" class="primary-btn">
-MAKE A QR →
-</a>
-
+<a href="#creator" class="btn">MAKE A QR →</a>
 </div>
 
 </section>
 
 
 <footer>
-
 <span>© 2026 LocaQR.</span>
-
 <span>Create Anything. One Scan.</span>
-
 </footer>
 
 
 <script>
 
-let currentType = "location";
+let currentType="location";
+let brandPattern="square";
+let brandColor="#111111";
 
 
 function selectType(type,button){
 
-    currentType = type;
+    currentType=type;
 
-    document.querySelectorAll(".type-btn")
-    .forEach(btn => btn.classList.remove("active"));
+    document.querySelectorAll(".type")
+    .forEach(x=>x.classList.remove("active"));
 
     button.classList.add("active");
 
-    document.getElementById("result").innerHTML = "";
+    document.getElementById("result").innerHTML="";
 
     showForm(type);
 }
@@ -542,561 +443,492 @@ function selectType(type,button){
 
 function showForm(type){
 
-    let html = "";
+let html="";
 
 
-    if(type === "location"){
-
-        html = `
-        <input id="location" class="field"
-        placeholder="Enter a location...">
-
-        <button class="generate" onclick="generateQR()">
-        GENERATE LOCATION QR →
-        </button>
-        `;
-
-    }
-
-
-    else if(type === "link"){
-
-        html = `
-        <input id="link" class="field"
-        placeholder="https://example.com">
-
-        <button class="generate" onclick="generateQR()">
-        GENERATE LINK QR →
-        </button>
-        `;
-
-    }
-
-
-    else if(type === "text"){
-
-        html = `
-        <textarea id="text" class="field"
-        placeholder="Enter your text..."></textarea>
-
-        <button class="generate" onclick="generateQR()">
-        GENERATE TEXT QR →
-        </button>
-        `;
-
-    }
-
-
-    else if(type === "phone"){
-
-        html = `
-        <input id="phone" class="field"
-        placeholder="+91 9876543210">
-
-        <button class="generate" onclick="generateQR()">
-        GENERATE PHONE QR →
-        </button>
-        `;
-
-    }
-
-
-    else if(type === "email"){
-
-        html = `
-        <input id="email" class="field"
-        placeholder="example@email.com">
-
-        <input id="emailSubject" class="field"
-        placeholder="Email subject">
-
-        <textarea id="emailMessage" class="field"
-        placeholder="Email message"></textarea>
-
-        <button class="generate" onclick="generateQR()">
-        GENERATE EMAIL QR →
-        </button>
-        `;
-
-    }
-
-
-    else if(type === "contact"){
-
-        html = `
-        <input id="contactName" class="field"
-        placeholder="Full name">
-
-        <input id="contactPhone" class="field"
-        placeholder="Phone number">
-
-        <input id="contactEmail" class="field"
-        placeholder="Email">
-
-        <input id="contactOrg" class="field"
-        placeholder="Organization">
-
-        <button class="generate" onclick="generateQR()">
-        GENERATE CONTACT QR →
-        </button>
-        `;
-
-    }
-
-
-    else if(type === "wifi"){
-
-        html = `
-        <input id="wifiName" class="field"
-        placeholder="Wi-Fi network name">
-
-        <input id="wifiPassword" class="field"
-        placeholder="Wi-Fi password">
-
-        <select id="wifiSecurity" class="field">
-            <option value="WPA">WPA/WPA2</option>
-            <option value="WEP">WEP</option>
-            <option value="nopass">No password</option>
-        </select>
-
-        <button class="generate" onclick="generateQR()">
-        GENERATE WI-FI QR →
-        </button>
-        `;
-
-    }
-
-
-    else if(type === "sms"){
-
-        html = `
-        <input id="smsPhone" class="field"
-        placeholder="Phone number">
-
-        <textarea id="smsMessage" class="field"
-        placeholder="Message"></textarea>
-
-        <button class="generate" onclick="generateQR()">
-        GENERATE SMS QR →
-        </button>
-        `;
-
-    }
-
-
-    else if(type === "whatsapp"){
-
-        html = `
-        <input id="whatsappPhone" class="field"
-        placeholder="Phone number with country code">
-
-        <textarea id="whatsappMessage" class="field"
-        placeholder="Message"></textarea>
-
-        <button class="generate" onclick="generateQR()">
-        GENERATE WHATSAPP QR →
-        </button>
-        `;
-
-    }
-
-
-    else if(type === "event"){
-
-        html = `
-        <input id="eventName" class="field"
-        placeholder="Event name">
-
-        <input id="eventLocation" class="field"
-        placeholder="Event location">
-
-        <input id="eventStart" class="field"
-        type="datetime-local">
-
-        <input id="eventEnd" class="field"
-        type="datetime-local">
-
-        <button class="generate" onclick="generateQR()">
-        GENERATE EVENT QR →
-        </button>
-        `;
-
-    }
-
-
-    else if(type === "file"){
-
-        html = `
-        <div class="info">
-        Upload your photo, video, audio or PDF to a file-sharing
-        service first, then paste its public sharing link here.
-        </div>
-
-        <input id="fileLink" class="field"
-        placeholder="Paste your file sharing link...">
-
-        <button class="generate" onclick="generateQR()">
-        GENERATE FILE QR →
-        </button>
-        `;
-
-    }
-
-
-    document.getElementById("formArea").innerHTML = html;
+if(type==="location"){
+html=`
+<input id="location" class="field" placeholder="Enter a location...">
+<button class="generate" onclick="generateQR()">GENERATE LOCATION QR →</button>`;
 }
 
 
-function getValue(id){
+if(type==="link"){
+html=`
+<input id="link" class="field" placeholder="https://example.com">
+<button class="generate" onclick="generateQR()">GENERATE LINK QR →</button>`;
+}
 
-    const element = document.getElementById(id);
 
-    return element ? element.value.trim() : "";
+if(type==="text"){
+html=`
+<textarea id="text" class="field" placeholder="Enter your text..."></textarea>
+<button class="generate" onclick="generateQR()">GENERATE TEXT QR →</button>`;
+}
 
+
+if(type==="phone"){
+html=`
+<input id="phone" class="field" placeholder="+91 9876543210">
+<button class="generate" onclick="generateQR()">GENERATE PHONE QR →</button>`;
+}
+
+
+if(type==="email"){
+html=`
+<input id="email" class="field" placeholder="Email address">
+<input id="subject" class="field" placeholder="Subject">
+<textarea id="message" class="field" placeholder="Message"></textarea>
+<button class="generate" onclick="generateQR()">GENERATE EMAIL QR →</button>`;
+}
+
+
+if(type==="contact"){
+html=`
+<input id="name" class="field" placeholder="Full name">
+<input id="contactPhone" class="field" placeholder="Phone">
+<input id="contactEmail" class="field" placeholder="Email">
+<input id="company" class="field" placeholder="Company / Organization">
+<button class="generate" onclick="generateQR()">GENERATE CONTACT QR →</button>`;
+}
+
+
+if(type==="wifi"){
+html=`
+<input id="ssid" class="field" placeholder="Wi-Fi network name">
+<input id="password" class="field" placeholder="Wi-Fi password">
+
+<select id="security" class="field">
+<option value="WPA">WPA / WPA2</option>
+<option value="WEP">WEP</option>
+<option value="nopass">No password</option>
+</select>
+
+<button class="generate" onclick="generateQR()">GENERATE WI-FI QR →</button>`;
+}
+
+
+if(type==="sms"){
+html=`
+<input id="smsPhone" class="field" placeholder="Phone number">
+<textarea id="smsMessage" class="field" placeholder="Message"></textarea>
+<button class="generate" onclick="generateQR()">GENERATE SMS QR →</button>`;
+}
+
+
+if(type==="whatsapp"){
+html=`
+<input id="waPhone" class="field" placeholder="Phone number with country code">
+<textarea id="waMessage" class="field" placeholder="Message"></textarea>
+<button class="generate" onclick="generateQR()">GENERATE WHATSAPP QR →</button>`;
+}
+
+
+if(type==="event"){
+html=`
+<input id="eventName" class="field" placeholder="Event name">
+<input id="eventLocation" class="field" placeholder="Event location">
+<input id="eventStart" class="field" type="datetime-local">
+<input id="eventEnd" class="field" type="datetime-local">
+<button class="generate" onclick="generateQR()">GENERATE EVENT QR →</button>`;
+}
+
+
+if(type==="file"){
+html=`
+<div class="info">
+For a photo, video, audio or PDF, paste its public sharing link.
+</div>
+
+<input id="fileLink" class="field" placeholder="Paste file sharing link...">
+
+<button class="generate" onclick="generateQR()">GENERATE FILE QR →</button>`;
+}
+
+
+if(type==="brand"){
+html=`
+<input id="brandData" class="field"
+placeholder="Enter a link or text for your QR">
+
+<div class="brand-options">
+
+<h3>Branded QR</h3>
+
+<p style="color:#777;font-size:13px;margin-bottom:15px">
+Turn your logo into a branded QR code with a unique dot pattern.
+Smart, stylish, and instantly recognizable.
+</p>
+
+<input id="logo" class="field" type="file" accept="image/*">
+
+<h3>Dot Pattern</h3>
+
+<div class="option-row">
+
+<button class="option active"
+onclick="setPattern('square',this)">SQUARE</button>
+
+<button class="option"
+onclick="setPattern('dots',this)">DOTS</button>
+
+<button class="option"
+onclick="setPattern('rounded',this)">ROUNDED</button>
+
+</div>
+
+<div class="color-row">
+<label><b>QR Color</b></label>
+<input id="brandColorInput" type="color" value="#111111"
+onchange="brandColor=this.value">
+</div>
+
+</div>
+
+<button class="generate" onclick="generateQR()">
+GENERATE BRANDED QR →
+</button>`;
+}
+
+
+document.getElementById("formArea").innerHTML=html;
+}
+
+
+function setPattern(pattern,button){
+
+brandPattern=pattern;
+
+document.querySelectorAll(".option")
+.forEach(x=>x.classList.remove("active"));
+
+button.classList.add("active");
+}
+
+
+function val(id){
+
+let x=document.getElementById(id);
+
+return x ? x.value.trim() : "";
 }
 
 
 function generateQR(){
 
-    let data = "";
+let data="";
 
 
-    if(currentType === "location"){
+if(currentType==="location"){
 
-        const location = getValue("location");
+let x=val("location");
 
-        if(!location){
-            alert("Please enter a location.");
-            return;
-        }
+if(!x)return alert("Enter a location.");
 
-        data =
-        "https://www.google.com/maps/search/?api=1&query="
-        + encodeURIComponent(location);
-
-    }
+data="https://www.google.com/maps/search/?api=1&query="
++encodeURIComponent(x);
+}
 
 
-    else if(currentType === "link"){
+if(currentType==="link"){
 
-        data = getValue("link");
+data=val("link");
 
-        if(!data){
-            alert("Please enter a link.");
-            return;
-        }
+if(!data)return alert("Enter a link.");
 
-        if(!/^https?:\/\//i.test(data)){
-            data = "https://" + data;
-        }
-
-    }
+if(!/^https?:\/\//i.test(data))
+data="https://"+data;
+}
 
 
-    else if(currentType === "text"){
+if(currentType==="text"){
 
-        data = getValue("text");
+data=val("text");
 
-        if(!data){
-            alert("Please enter some text.");
-            return;
-        }
-
-    }
+if(!data)return alert("Enter some text.");
+}
 
 
-    else if(currentType === "phone"){
+if(currentType==="phone"){
 
-        const phone = getValue("phone");
+let x=val("phone");
 
-        if(!phone){
-            alert("Please enter a phone number.");
-            return;
-        }
+if(!x)return alert("Enter a phone number.");
 
-        data = "tel:" + phone;
-
-    }
+data="tel:"+x;
+}
 
 
-    else if(currentType === "email"){
+if(currentType==="email"){
 
-        const email = getValue("email");
+let email=val("email");
 
-        if(!email){
-            alert("Please enter an email.");
-            return;
-        }
+if(!email)return alert("Enter an email.");
 
-        const subject =
-        encodeURIComponent(getValue("emailSubject"));
-
-        const message =
-        encodeURIComponent(getValue("emailMessage"));
-
-        data =
-        "mailto:" + email +
-        "?subject=" + subject +
-        "&body=" + message;
-
-    }
+data="mailto:"+email+
+"?subject="+encodeURIComponent(val("subject"))+
+"&body="+encodeURIComponent(val("message"));
+}
 
 
-    else if(currentType === "contact"){
+if(currentType==="contact"){
 
-        const name = getValue("contactName");
-        const phone = getValue("contactPhone");
-        const email = getValue("contactEmail");
-        const org = getValue("contactOrg");
+let name=val("name");
+let phone=val("contactPhone");
+let email=val("contactEmail");
+let company=val("company");
 
-        if(!name && !phone){
-            alert("Please enter at least a name or phone number.");
-            return;
-        }
+if(!name && !phone)
+return alert("Enter a name or phone number.");
 
-        data =
+data=
 `BEGIN:VCARD
 VERSION:3.0
 FN:${name}
 TEL:${phone}
 EMAIL:${email}
-ORG:${org}
+ORG:${company}
 END:VCARD`;
-
-    }
-
-
-    else if(currentType === "wifi"){
-
-        const ssid = getValue("wifiName");
-        const password = getValue("wifiPassword");
-        const security = getValue("wifiSecurity");
-
-        if(!ssid){
-            alert("Please enter the Wi-Fi name.");
-            return;
-        }
-
-        data =
-        `WIFI:T:${security};S:${ssid};P:${password};;`;
-
-    }
+}
 
 
-    else if(currentType === "sms"){
+if(currentType==="wifi"){
 
-        const phone = getValue("smsPhone");
-        const message = getValue("smsMessage");
+let ssid=val("ssid");
+let password=val("password");
+let security=val("security");
 
-        if(!phone){
-            alert("Please enter a phone number.");
-            return;
-        }
+if(!ssid)return alert("Enter Wi-Fi name.");
 
-        data =
-        "SMSTO:" + phone + ":" + message;
-
-    }
+data=`WIFI:T:${security};S:${ssid};P:${password};;`;
+}
 
 
-    else if(currentType === "whatsapp"){
+if(currentType==="sms"){
 
-        const phone = getValue("whatsappPhone");
-        const message = getValue("whatsappMessage");
+let phone=val("smsPhone");
 
-        if(!phone){
-            alert("Please enter a phone number.");
-            return;
-        }
+if(!phone)return alert("Enter a phone number.");
 
-        data =
-        "https://wa.me/" +
-        phone.replace(/\D/g,"") +
-        "?text=" +
-        encodeURIComponent(message);
-
-    }
+data="SMSTO:"+phone+":"+val("smsMessage");
+}
 
 
-    else if(currentType === "event"){
+if(currentType==="whatsapp"){
 
-        const name = getValue("eventName");
-        const location = getValue("eventLocation");
-        const start = getValue("eventStart");
-        const end = getValue("eventEnd");
+let phone=val("waPhone");
 
-        if(!name || !start){
-            alert("Please enter the event name and start time.");
-            return;
-        }
+if(!phone)return alert("Enter a phone number.");
 
-        function formatDate(value){
+data="https://wa.me/"+
+phone.replace(/\D/g,"")+
+"?text="+encodeURIComponent(val("waMessage"));
+}
 
-            return new Date(value)
-            .toISOString()
-            .replace(/[-:]/g,"")
-            .split(".")[0] + "Z";
 
-        }
+if(currentType==="event"){
 
-        data =
+let name=val("eventName");
+let location=val("eventLocation");
+let start=val("eventStart");
+let end=val("eventEnd");
+
+if(!name || !start)
+return alert("Enter event name and start time.");
+
+function dateFormat(x){
+return new Date(x).toISOString()
+.replace(/[-:]/g,"")
+.split(".")[0]+"Z";
+}
+
+data=
 `BEGIN:VEVENT
 SUMMARY:${name}
 LOCATION:${location}
-DTSTART:${formatDate(start)}
-DTEND:${formatDate(end || start)}
+DTSTART:${dateFormat(start)}
+DTEND:${dateFormat(end || start)}
 END:VEVENT`;
-
-    }
-
-
-    else if(currentType === "file"){
-
-        data = getValue("fileLink");
-
-        if(!data){
-            alert("Please paste a file sharing link.");
-            return;
-        }
-
-        if(!/^https?:\/\//i.test(data)){
-            data = "https://" + data;
-        }
-
-    }
+}
 
 
-    document.getElementById("result").innerHTML = `
+if(currentType==="file"){
 
-        <div class="qr-box">
+data=val("fileLink");
 
-            <div id="qrcode"></div>
+if(!data)return alert("Paste a file sharing link.");
 
-            <div class="actions">
-
-                <button onclick="downloadQR()">
-                    DOWNLOAD
-                </button>
-
-                <button onclick="copyQRData()">
-                    COPY LINK/DATA
-                </button>
-
-                <button onclick="shareQR()">
-                    SHARE
-                </button>
-
-            </div>
-
-        </div>
-    `;
+if(!/^https?:\/\//i.test(data))
+data="https://"+data;
+}
 
 
-    new QRCode(document.getElementById("qrcode"),{
+if(currentType==="brand"){
 
-        text:data,
-        width:230,
-        height:230
+data=val("brandData");
 
-    });
+if(!data)return alert("Enter a link or text.");
+
+if(/^https?:\/\//i.test(data)===false &&
+data.includes("."))
+data="https://"+data;
+}
 
 
-    window.currentQRData = data;
+document.getElementById("result").innerHTML=`
+<div class="qr-box">
+<div id="qrcode"></div>
 
-    document
-    .getElementById("result")
-    .scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-    });
+<div class="actions">
+<button onclick="downloadQR()">DOWNLOAD</button>
+<button onclick="copyData()">COPY DATA</button>
+<button onclick="shareQR()">SHARE</button>
+</div>
+</div>`;
+
+window.qrData=data;
+
+let color =
+currentType==="brand"
+? document.getElementById("brandColorInput").value
+: "#111111";
+
+let qr=new QRCode(document.getElementById("qrcode"),{
+text:data,
+width:230,
+height:230,
+colorDark:color,
+colorLight:"#ffffff",
+correctLevel:QRCode.CorrectLevel.H
+});
+
+
+if(currentType==="brand"){
+
+let logo=document.getElementById("logo");
+
+if(logo.files && logo.files[0]){
+
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+setTimeout(()=>{
+
+let img=document.querySelector("#qrcode img");
+
+if(img){
+
+let canvas=document.createElement("canvas");
+canvas.width=230;
+canvas.height=230;
+
+let ctx=canvas.getContext("2d");
+
+let qrImage=new Image();
+
+qrImage.onload=function(){
+
+ctx.drawImage(qrImage,0,0,230,230);
+
+let logoImage=new Image();
+
+logoImage.onload=function(){
+
+let size=55;
+let x=(230-size)/2;
+let y=(230-size)/2;
+
+ctx.fillStyle="#fff";
+ctx.fillRect(x-7,y-7,size+14,size+14);
+
+ctx.drawImage(logoImage,x,y,size,size);
+
+document.getElementById("qrcode").innerHTML="";
+
+let finalImg=document.createElement("img");
+finalImg.src=canvas.toDataURL("image/png");
+
+document.getElementById("qrcode").appendChild(finalImg);
+
+};
+
+logoImage.src=e.target.result;
+
+};
+
+qrImage.src=img.src;
+
+}
+
+},300);
+
+};
+
+reader.readAsDataURL(logo.files[0]);
+}
+}
+
+document.getElementById("result")
+.scrollIntoView({behavior:"smooth",block:"center"});
 
 }
 
 
 function downloadQR(){
 
-    const image =
-    document.querySelector("#qrcode img");
+let img=document.querySelector("#qrcode img");
 
-    if(!image){
-        return;
-    }
+if(!img)return;
 
-    const link =
-    document.createElement("a");
+let link=document.createElement("a");
 
-    link.href = image.src;
+link.href=img.src;
+link.download="LocaQR.png";
 
-    link.download = "LocaQR.png";
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    document.body.removeChild(link);
-
+link.click();
 }
 
 
-async function copyQRData(){
+async function copyData(){
 
-    if(!window.currentQRData){
-        return;
-    }
+if(!window.qrData)return;
 
-    try{
+try{
 
-        await navigator.clipboard.writeText(
-            window.currentQRData
-        );
+await navigator.clipboard.writeText(window.qrData);
 
-        alert("QR data copied!");
+alert("Copied!");
 
-    }catch(error){
+}catch(e){
 
-        alert("Copy is not available on this browser.");
+alert("Copy is not available here.");
 
-    }
-
+}
 }
 
 
 async function shareQR(){
 
-    const image =
-    document.querySelector("#qrcode img");
+if(navigator.share){
 
-    if(!image){
-        return;
-    }
+try{
 
+await navigator.share({
+title:"LocaQR",
+text:"My QR Code",
+url:window.qrData
+});
 
-    if(navigator.share){
+}catch(e){}
 
-        try{
+}else{
 
-            await navigator.share({
-                title:"LocaQR",
-                text:"My QR Code",
-                url:window.currentQRData
-            });
+await copyData();
 
-        }catch(error){
+alert("QR data copied. You can share it anywhere.");
 
-            console.log("Share cancelled.");
-
-        }
-
-    }else{
-
-        await copyQRData();
-
-        alert(
-        "Sharing is not supported here. The QR data has been copied."
-        );
-
-    }
-
+}
 }
 
 
